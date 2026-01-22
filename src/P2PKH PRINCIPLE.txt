@@ -1,0 +1,41 @@
+P2PKH PRINCIPLE (HOW SIGSCRIPT AND SCRIPTPUBKEY ARE USED)
+
+To explain P2PKH (Pay-to-PubKey-Hash) in Bitcoin using the Alice and Bob analogy, let’s break it down step by step: 
+
+Characters: 
+-----------
+Alice: She wants to send some Bitcoin to Bob. 
+Bob: He wants to receive Bitcoin from Alice.
+
+Step-by-Step Breakdown of P2PKH: 
+--------------------------------
+Bob Creates a Public Address (Bitcoin Address): Bob has a private key (like a secret password) and a public key (like his email address or bank account number). The public key is hashed (via a cryptographic function) to generate a public key hash (PKH). Bob gives Alice his Bitcoin address, which is the hashed public key (it’s a shorter, more convenient form of the public key). 
+
+For example: 
+Bob’s Public Key: PubKey_Bob 
+Bob’s Bitcoin Address (P2PKH): 1BobBitcoinAddress 
+
+Alice Wants to Send Bitcoin: Alice has some Bitcoin in her wallet, and she wants to send some to Bob. Alice will create a transaction with the following details: 
+Input: The Bitcoin she’s sending (a previous unspent transaction output or UTXO). 
+Output: Bob’s Bitcoin address (which is derived from his public key hash). 
+The Transaction: Alice’s wallet creates a transaction with Bob’s address as the recipient. 
+
+The output will be a script that essentially says: "This Bitcoin can only be spent by the person who has the private key corresponding to the public key that hashes to Bob’s Bitcoin address." 
+
+The transaction uses a scriptPubKey (the locking script) to lock the Bitcoin. In this case, the script is: OP_DUP OP_HASH160 <Bob’s Public Key Hash> OP_EQUALVERIFY OP_CHECKSIG 
+
+The most important part here is the OP_HASH160 followed by Bob’s public key hash. This is what makes it Pay-to-PubKey-Hash. It means the funds can only be spent by someone who knows the private key corresponding to that public key hash. 
+
+Bob Receives the Transaction: The transaction is broadcast to the Bitcoin network. Once it’s confirmed in a block, Bob sees that he has received Bitcoin. Bob can now spend those funds, but to do so, he must prove he controls the private key associated with the public key hash in the script.
+
+Bob Spends the Bitcoin: When Bob wants to spend the Bitcoin he received, he creates a new transaction (the spending transaction). He signs it using his private key.
+
+The scriptSig (unlocking script) contains: Bob’s public key. A signature proving that he controls the private key for the public key. 
+
+Once the transaction is broadcast, the network will verify that: The signature matches Bob’s public key. 
+
+The public key corresponds to the public key hash in the locking script (scriptPubKey) of the original transaction. 
+
+Recap in Simple Terms: 
+----------------------
+Alice sends Bitcoin to Bob’s Bitcoin address, which is the hash of his public key (Bob’s address is like a lock). Bob holds the private key (his secret password), and to spend the Bitcoin, he needs to prove he’s the rightful owner of the address by signing the transaction with his private key (unlocking the lock). The Bitcoin network ensures that only Bob, who has the private key corresponding to the address, can spend the Bitcoin. This process of using public key hashes to lock and unlock transactions is what makes P2PKH (Pay-to-PubKey-Hash) secure and widely used in Bitcoin.
