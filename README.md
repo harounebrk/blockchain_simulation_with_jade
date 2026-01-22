@@ -1,6 +1,6 @@
 Welcome to the blockchain simulation project.
 
-To make this project works please follow the following steps:
+To make this project work, please follow the following steps:
 
 1- Create a new Java project and add jade.jar and guava-23.0.jar files to the referenced libraries of the project.
    (Download the jade.jar file from "https://jade.tilab.com/download/jade/license/jade-download/" and the guava-23.0.jar file from "https://repo1.maven.org/maven2/com/google/guava/guava/23.0/")
