@@ -1,4 +1,4 @@
-Welcome to the blockchain simulation project.
+Welcome to this blockchain simulation project.
 
 To make this project work, please follow the following steps:
 
